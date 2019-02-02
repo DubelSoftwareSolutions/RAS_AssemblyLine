@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>06a6e1a6-1ae7-448f-a66d-5cf8cc9cfe5a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>RAS_AssemblyLine.py</StartupFile>
+    <StartupFile>Tutorial2.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="RAS_AssemblyLine.py" />
+    <Compile Include="Tutorial1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tutorial2.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
