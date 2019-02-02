@@ -5,8 +5,10 @@ from PT_Simulator import *
 
 if __name__ == "__main__":
     LineSimulator = PT_Simulator()
-    BufferCapacity = [2,1]
+    BufferCapacity = [1,1]
     ProcessOperations = [[0, 1]]
     PTnet = LineSimulator.buildLinePTModel(BufferCapacity,ProcessOperations)
-    print(PTnet.get_marking())
+    print(LineSimulator.enabledTransitions())
+    LineSimulator.fireTransition(LineSimulator.enabledTransitions()[0].name)
+    print(LineSimulator.enabledTransitions())
     PTnet.draw('OneProcessLineParametrised.png')

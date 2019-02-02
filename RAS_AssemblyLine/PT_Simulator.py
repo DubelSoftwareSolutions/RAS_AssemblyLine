@@ -6,6 +6,8 @@ class PT_Simulator(object):
     
     def __init__(self):
         self.net = PetriNet('MultiProcessAssemblyLine')
+        self.TransitionFired = 0
+        self.TransitionDisabled = 1
 
     def buildLinePTModel(self, BufferCapacity, ProcessOperations):
         numberOfRobots = 1
@@ -52,6 +54,22 @@ class PT_Simulator(object):
             net.add_output('Robot0','P'+str(i)+'_Finish',Value(1))
 
         return net
+
+    def fireTransition(self, transitionName):
+        net = self.net
+        if(len(net.transition(transitionName).modes()) > 0):
+            net.transition(transitionName).fire(Substitution())
+            return self.TransitionFired
+        else:
+            return self.TransitionDisabled
+            
+    def enabledTransitions(self):
+        EnabledTransitions = []
+        for transition in self.net.transition():
+            if(len(transition.modes()) > 0):
+                EnabledTransitions.extend([transition])
+        return EnabledTransitions
+
 
 
 
