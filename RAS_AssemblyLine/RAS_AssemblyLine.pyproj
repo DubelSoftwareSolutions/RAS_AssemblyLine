@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>06a6e1a6-1ae7-448f-a66d-5cf8cc9cfe5a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Tutorial3.py</StartupFile>
+    <StartupFile>OneProcessLine.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="OneProcessLine.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RAS_AssemblyLine.py" />
     <Compile Include="Tutorial1.py">
       <SubType>Code</SubType>
