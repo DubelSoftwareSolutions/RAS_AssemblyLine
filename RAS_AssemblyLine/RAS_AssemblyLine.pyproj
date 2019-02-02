@@ -25,6 +25,12 @@
     <Compile Include="OneProcessLine.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PT_Controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PT_Simulator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RAS_AssemblyLine.py" />
     <Compile Include="Tutorial1.py">
       <SubType>Code</SubType>
