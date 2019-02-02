@@ -1,3 +1,4 @@
+import time
 import snakes.plugins
 snakes.plugins.load('gv', 'snakes.nets', 'nets')
 from nets import *
@@ -8,11 +9,17 @@ class PT_Simulator(object):
         self.net = PetriNet('MultiProcessAssemblyLine')
         self.TransitionFired = 0
         self.TransitionDisabled = 1
+        self.ProcessOperations = []
+        self.OperationDuration = []
+        self.ProgressTimers = []
 
-    def buildLinePTModel(self, BufferCapacity, ProcessOperations):
+    def buildLinePTModel(self, BufferCapacity, ProcessOperations, OperationDuration):
         numberOfRobots = 1
         numberOfMachines = len(BufferCapacity)
         numberOfProcesses = len(ProcessOperations)
+        self.ProcessOperations = ProcessOperations
+        self.OperationDuration = OperationDuration
+        self.ProgressTimers = [[0] * len(ProcessOperations[0])] * len(ProcessOperations)
         net = self.net
         for i in range(0, numberOfRobots):
             net.add_place(Place('Robot'+str(i), [1]))
@@ -59,12 +66,23 @@ class PT_Simulator(object):
         net = self.net
         if(len(net.transition(transitionName).modes()) > 0):
             net.transition(transitionName).fire(Substitution())
+            if( "Begin" in transitionName):
+                placeName = transitionName.replace("Begin","InProgress")
+                net.place(placeName).remove(1)
+                ProgressTimers[int(placeName[1])][int(placeName[4])] = time.time()
             return self.TransitionFired
         else:
             return self.TransitionDisabled
             
     def enabledTransitions(self):
         EnabledTransitions = []
+        for i in range(0,len(self.ProgressTimers)):
+            for j in range(0,len(self.ProgressTimers[i])):
+                currentTime = time.time()
+                if(currentTime - self.ProgressTimers[i][j] >= self.OperationDuration[i][j]):
+                    placeName = 'P'+str(i)+'_O'+str(j)+'_inProgress'
+                    self.net.place(placeName).add(1)
+
         for transition in self.net.transition():
             if(len(transition.modes()) > 0):
                 EnabledTransitions.extend([transition])
