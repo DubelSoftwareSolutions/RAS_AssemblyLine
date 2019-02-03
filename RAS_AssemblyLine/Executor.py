@@ -1,5 +1,7 @@
 import yaml
 import sys
+from PNetBuilder import *
+from PT_Simulator import *
 
 
 def main():
@@ -7,18 +9,11 @@ def main():
         print("Configuration name is required")
         sys.exit(1)
 
-    with open('config/' + sys.argv[1] + '.yaml') as f:
-        configuration = yaml.load(f)
+    LineSimulator = PT_Simulator()
 
-    operations = configuration['operations']
-
-    for operation in operations:
-        print(operations[operation])
-
-
-
-
-
+    # FIXME wrong array types
+    PTNet = PNetBuilder.build('config/' + sys.argv[1] + '.yaml', LineSimulator)
+    print(LineSimulator.enabledTransitions())
 
 
 
