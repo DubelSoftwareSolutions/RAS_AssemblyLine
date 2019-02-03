@@ -7,11 +7,13 @@ drawings = 'drawings/'
 def main():
     if len(sys.argv) < 2:
         print("Configuration name is required")
-        sys.exit(1)
+        config = 'example'
+    else:
+        config = sys.argv[1]
 
     LineSimulator = PT_Simulator()
 
-    PTNet = PT_NetBuilder.build('config/' + sys.argv[1] + '.yaml', LineSimulator)
+    PTNet = PT_NetBuilder.build('config/' + config + '.yaml', LineSimulator)
     LineSimulator.enabledTransitions()
     print(LineSimulator.enabledTransitions())
     LineSimulator.fireTransition(LineSimulator.enabledTransitions()[0].name)
