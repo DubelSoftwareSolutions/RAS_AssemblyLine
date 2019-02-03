@@ -2,6 +2,7 @@ import time
 import sys
 from PT_NetBuilder import *
 from PT_Simulator import *
+from PT_Controller import *
 
 drawings = 'drawings/'
 def main():
@@ -12,13 +13,14 @@ def main():
         config = sys.argv[1]
 
     LineSimulator = PT_Simulator()
+    LineController = PT_Controller()
 
     PTNet = PT_NetBuilder.build('config/' + config + '.yaml', LineSimulator)
     while(True):
        print(LineSimulator.enabledTransitions())
        print(LineSimulator.net.get_marking())
        if(len(LineSimulator.enabledTransitions()) > 0):
-           LineSimulator.fireTransition(LineSimulator.enabledTransitions()[-1].name)
+           LineController.ExecuteHighestPriority(LineSimulator)
        input("Press Enter to continue...")
 
 
