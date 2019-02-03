@@ -1,0 +1,44 @@
+machines:
+  m1:
+    capacity: 5
+  m2:
+    capacity: 1
+  m3:
+    capacity: 2
+  m4:
+    capacity: 4
+
+processes:
+  p1:
+    order:
+      - 1
+      - 2
+      - 3
+    number_of_parts: 8
+  p2:
+    order:
+      - 1
+      - 3
+      - 2
+    number_of_parts: 8
+  p3:
+    order:
+      - 3
+      - 2
+      - 1
+    number_of_parts: 8
+
+
+operations:
+  o1:
+    required_machine: m2
+    execution_time: 8
+  o2:
+    required_machine: m4
+    execution_time: 1
+  o3:
+    required_machine: m1
+    execution_time: 3
+  o4:
+    required_machine: m3
+    execution_time: 2
