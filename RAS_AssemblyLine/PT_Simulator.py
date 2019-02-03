@@ -24,14 +24,18 @@ class PT_Simulator(object):
         for i in range(0, numberOfRobots):
             net.add_place(Place('Robot'+str(i), [1]))
         for i in range(0, numberOfMachines):
-            bufferMarking = [1] * BufferCapacity[i]
+            bufferMarking = [] * BufferCapacity[i]
             net.add_place(Place('Machine'+str(i),[1]))
             net.add_place(Place('Buffer'+str(i),bufferMarking))
     
     
         for i in range(0, len(ProcessOperations)):
             for j in range(0, len(ProcessOperations[i])):
-                net.add_place(Place('P'+str(i)+'_O'+str(j)+'_Ready',[]))
+                if(j == 0):
+                    Tokens = [1]
+                else:
+                    Tokens = []
+                net.add_place(Place('P'+str(i)+'_O'+str(j)+'_Ready',Tokens))
                 net.add_place(Place('P'+str(i)+'_O'+str(j)+'_InProgress',[]))
                 net.add_place(Place('P'+str(i)+'_O'+str(j)+'_Finished',[]))
         
@@ -69,7 +73,7 @@ class PT_Simulator(object):
             if( "Begin" in transitionName):
                 placeName = transitionName.replace("Begin","InProgress")
                 net.place(placeName).remove(1)
-                ProgressTimers[int(placeName[1])][int(placeName[4])] = time.time()
+                self.ProgressTimers[int(placeName[1])][int(placeName[4])] = time.time()
             return self.TransitionFired
         else:
             return self.TransitionDisabled
@@ -78,17 +82,14 @@ class PT_Simulator(object):
         EnabledTransitions = []
         for i in range(0,len(self.ProgressTimers)):
             for j in range(0,len(self.ProgressTimers[i])):
-                currentTime = time.time()
-                if(currentTime - self.ProgressTimers[i][j] >= self.OperationDuration[i][j]):
-                    placeName = 'P'+str(i)+'_O'+str(j)+'_inProgress'
-                    self.net.place(placeName).add(1)
+                if(self.ProgressTimers[i][j] > 0):
+                    currentTime = time.time()
+                    if(currentTime - self.ProgressTimers[i][j] >= self.OperationDuration[i][j]):
+                        placeName = 'P'+str(i)+'_O'+str(j)+'_InProgress'
+                        self.net.place(placeName).add(1)
+                        self.ProgressTimers[i][j] = 0
 
         for transition in self.net.transition():
             if(len(transition.modes()) > 0):
                 EnabledTransitions.extend([transition])
         return EnabledTransitions
-
-
-
-
-
