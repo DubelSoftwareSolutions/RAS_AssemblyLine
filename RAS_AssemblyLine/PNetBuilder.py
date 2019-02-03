@@ -9,11 +9,8 @@ class PNetBuilder:
     ExecutionTimes = []
 
     @classmethod
-    def build(cls, fname):
-
-        LineSimulator = PT_Simulator()
-
-        cls.load()
+    def build(cls, fname, simulator):
+        cls.load(fname)
 
         print(cls.MachinesBufferCapacities)
         print(cls.OperationOrders)
@@ -21,6 +18,8 @@ class PNetBuilder:
 
         print(cls.RquiredMachines)
         print(cls.ExecutionTimes)
+
+        return simulator.buildLinePTModel(cls.MachinesBufferCapacities, cls.OperationOrders, cls.ExecutionTimes)
 
     @classmethod
     def load(cls, fname):
