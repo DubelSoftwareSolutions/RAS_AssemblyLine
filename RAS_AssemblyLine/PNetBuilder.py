@@ -10,13 +10,10 @@ class PNetBuilder:
 
     @classmethod
     def build(cls, fname):
-        LineSimulator = PT_Simulator()
-        with open(fname) as f:
-            configuration = yaml.load(f)
 
-        cls.loadMachines(configuration)
-        cls.loadProcesses(configuration)
-        cls.loadOperations(configuration)
+        LineSimulator = PT_Simulator()
+
+        cls.load()
 
         print(cls.MachinesBufferCapacities)
         print(cls.OperationOrders)
@@ -24,6 +21,15 @@ class PNetBuilder:
 
         print(cls.RquiredMachines)
         print(cls.ExecutionTimes)
+
+    @classmethod
+    def load(cls, fname):
+        with open(fname) as f:
+            configuration = yaml.load(f)
+
+        cls.loadMachines(configuration)
+        cls.loadProcesses(configuration)
+        cls.loadOperations(configuration)
 
     @classmethod
     def loadMachines(cls, configuration):
