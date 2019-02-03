@@ -1,7 +1,7 @@
 import yaml
 from PT_Simulator import *
 
-class PNetBuilder:
+class PT_NetBuilder:
     MachinesBufferCapacities = []
     OperationOrders = []
     NumberOfParts = []

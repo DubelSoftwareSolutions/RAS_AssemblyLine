@@ -1,6 +1,6 @@
 import yaml
 import sys
-from PNetBuilder import *
+from PT_NetBuilder import *
 from PT_Simulator import *
 
 
@@ -12,7 +12,8 @@ def main():
     LineSimulator = PT_Simulator()
 
     # FIXME wrong array types
-    PTNet = PNetBuilder.build('config/' + sys.argv[1] + '.yaml', LineSimulator)
+    PTNet = PT_NetBuilder.build('config/' + sys.argv[1] + '.yaml', LineSimulator)
+    LineSimulator.enabledTransitions()
     print(LineSimulator.enabledTransitions())
 
 
