@@ -1,17 +1,17 @@
 machines:
-  m1:
+  m0:
     capacity: 5
-  m2:
+  m1:
     capacity: 1
-  m3:
+  m2:
     capacity: 2
-  m4:
+  m3:
     capacity: 4
 
 processes:
   p1:
     order:
-      - 1
+      - 0
       - 2
       - 3
     number_of_parts: 8
@@ -30,15 +30,15 @@ processes:
 
 
 operations:
-  o1:
-    required_machine: m2
+  o0:
+    required_machine: 2
     execution_time: 8
-  o2:
-    required_machine: m4
+  o1:
+    required_machine: 0
     execution_time: 1
-  o3:
-    required_machine: m1
+  o2:
+    required_machine: 1
     execution_time: 3
-  o4:
-    required_machine: m3
+  o3:
+    required_machine: 3
     execution_time: 2
