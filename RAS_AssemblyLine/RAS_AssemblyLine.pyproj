@@ -4,13 +4,17 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>06a6e1a6-1ae7-448f-a66d-5cf8cc9cfe5a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>MultiProcessLineParametrised.py</StartupFile>
+    <StartupFile>Executor.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>RAS_AssemblyLine</Name>
     <RootNamespace>RAS_AssemblyLine</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>"example"</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

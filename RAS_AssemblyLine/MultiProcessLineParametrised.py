@@ -16,6 +16,7 @@ if __name__ == "__main__":
         print(LineSimulator.net.get_marking())
         if(len(LineSimulator.enabledTransitions()) > 0):
             LineSimulator.fireTransition(LineSimulator.enabledTransitions()[-1].name)
-        time.sleep(1)
+        input("Press Enter to continue...")
+
 
     PTnet.draw('OneProcessLineParametrised.png')

@@ -12,14 +12,12 @@ def main():
     LineSimulator = PT_Simulator()
 
     PTNet = PT_NetBuilder.build('config/' + sys.argv[1] + '.yaml', LineSimulator)
-    LineSimulator.enabledTransitions()
-    print(LineSimulator.enabledTransitions())
-    LineSimulator.fireTransition(LineSimulator.enabledTransitions()[0].name)
-    time_start = time.time()
-    print(LineSimulator.enabledTransitions())
-    # while(time.time() - time_start <= OperationDuration[0][0]):
-    #     dupa = 0
-    print(LineSimulator.enabledTransitions())
+    while(True):
+       print(LineSimulator.enabledTransitions())
+       print(LineSimulator.net.get_marking())
+       if(len(LineSimulator.enabledTransitions()) > 0):
+           LineSimulator.fireTransition(LineSimulator.enabledTransitions()[-1].name)
+       input("Press Enter to continue...")
     PTNet.draw(drawings+'OneProcessLineParametrised.png')
 
 
