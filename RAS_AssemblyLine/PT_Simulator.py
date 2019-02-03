@@ -76,6 +76,10 @@ class PT_Simulator(object):
                 placeName = transitionName.replace("Begin","InProgress")
                 net.place(placeName).empty()
                 self.ProgressTimers[int(placeName[1])][int(placeName[4])] = time.time()
+            if( "Finish" in transitionName and "_O" not in transitionName):
+                file = open("./output/FinishedProcesses.txt","a")
+                file.write(transitionName + '\n')
+                file.close()
             return self.TransitionFired
         else:
             return self.TransitionDisabled
