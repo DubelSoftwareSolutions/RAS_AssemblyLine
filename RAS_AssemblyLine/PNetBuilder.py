@@ -15,11 +15,13 @@ class PNetBuilder:
         print(orders)
 
     def loadMachines(self, configuration):
-        machines_buffer_capacities = []
-        machines = configuration['machines']
+        MachinesBufferCapacities = []
+        Machines = configuration['machines']
 
-        for machine in machines:
-            machines_buffer_capacities.append(machines[machine]['capacity'])
+        for machine in Machines:
+            MachinesBufferCapacities.append(Machines[machine]['capacity'])
+
+        return MachinesBufferCapacities
 
     def loadProcessOrders(self, configuration):
         OperationOrders = []
