@@ -21,7 +21,6 @@ def main():
        print(LineSimulator.net.get_marking())
        if(len(LineSimulator.enabledTransitions()) > 0):
            LineController.ExecuteHighestPriority(LineSimulator)
-       input("Press Enter to continue...")
 
 
 if __name__ == '__main__':

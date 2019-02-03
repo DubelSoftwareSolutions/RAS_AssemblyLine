@@ -29,5 +29,6 @@ class PT_Controller(object):
                 TransitionPriorities[i] += int(Transitions[i].name[4])*1
             TransitionPriorities[i] += int(Transitions[i].name[1])*10
         TransitionToFire = Transitions[numpy.argmin(TransitionPriorities)].name
-        print("Fire Transition: "+TransitionToFire)
+        print("Transition To Fire: "+TransitionToFire)
+        input("Press Enter to continue...")
         Simulator.fireTransition(TransitionToFire)

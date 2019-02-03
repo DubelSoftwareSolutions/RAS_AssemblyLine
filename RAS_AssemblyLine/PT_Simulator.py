@@ -25,8 +25,8 @@ class PT_Simulator(object):
             net.add_place(Place('Robot'+str(i), ['R']))
         for i in range(0, numberOfMachines):
             #FIXME buffer capacity
-            bufferMarking = list(range(0,numberOfProcesses)) * BufferCapacity[i]
-            #bufferMarking = list(range(0,numberOfProcesses))
+            #bufferMarking = list(range(0,numberOfProcesses)) * BufferCapacity[i]
+            bufferMarking = list(range(0,numberOfProcesses))
             net.add_place(Place('Machine'+str(i),['M'+str(i)]))
             net.add_place(Place('Buffer'+str(i),bufferMarking))
     
