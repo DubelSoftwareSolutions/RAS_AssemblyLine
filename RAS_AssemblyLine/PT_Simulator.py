@@ -96,7 +96,7 @@ class PT_Simulator(object):
                 file.close()
             print("TransitionFired: "+transitionName)
 
-            if(not "Prepare" in transitionName):
+            if(not "Prepare" in transitionName and "_O" in transitionName):
                 self.saveTransition(transitionName)
             return self.TransitionFired
         else:
@@ -124,7 +124,7 @@ class PT_Simulator(object):
     def saveTransition(self, transitionName):
         f = open(self.OutputFilePath, 'a')
         machine = '0'
-        if("Finish" in transitionName and "O" in transitionName ):
+        if("Finish" in transitionName):
             try:
                 machine = str(self.net.get_marking()[transitionName+'ed']).replace('{', '').replace('}', '')
             except KeyError:
