@@ -14,19 +14,19 @@ processes:
       - p11
       - p12
       - p13
-    numper_of_parts: 8
+    number_of_parts: 8
   p2:
     order:
       - p21
       - p22
       - p23
-    numper_of_parts: 8
+    number_of_parts: 8
   p3:
     order:
       - p31
       - p32
       - p33
-    numper_of_parts: 8
+    number_of_parts: 8
 
 
 operations:
