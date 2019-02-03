@@ -22,17 +22,17 @@ class PT_Simulator(object):
         self.ProgressTimers = [[0] * len(ProcessOperations[0])] * len(ProcessOperations)
         net = self.net
         for i in range(0, numberOfRobots):
-            net.add_place(Place('Robot'+str(i), [1]))
+            net.add_place(Place('Robot'+str(i), ['R']))
         for i in range(0, numberOfMachines):
-            bufferMarking = [] * BufferCapacity[i]
-            net.add_place(Place('Machine'+str(i),[1]))
+            bufferMarking = list(range(0,numberOfProcesses)) * BufferCapacity[i]
+            net.add_place(Place('Machine'+str(i),['M'+str(i)]))
             net.add_place(Place('Buffer'+str(i),bufferMarking))
     
     
         for i in range(0, len(ProcessOperations)):
             for j in range(0, len(ProcessOperations[i])):
                 if(j == 0):
-                    Tokens = [1]
+                    Tokens = []
                 else:
                     Tokens = []
                 net.add_place(Place('P'+str(i)+'_O'+str(j)+'_Ready',Tokens))
@@ -40,29 +40,29 @@ class PT_Simulator(object):
                 net.add_place(Place('P'+str(i)+'_O'+str(j)+'_Finished',[]))
         
                 net.add_transition(Transition('P'+str(i)+'_O'+str(j)+'_Prepare'))
-                net.add_input('Buffer'+str(ProcessOperations[i][j]),'P'+str(i)+'_O'+str(j)+'_Prepare',Value(1))
-                net.add_input('Robot0','P'+str(i)+'_O'+str(j)+'_Prepare',Value(1))
-                net.add_output('P'+str(i)+'_O'+str(j)+'_Ready','P'+str(i)+'_O'+str(j)+'_Prepare',Value(1))
-                net.add_output('Robot0','P'+str(i)+'_O'+str(j)+'_Prepare',Value(1))
+                net.add_input('Buffer'+str(ProcessOperations[i][j]),'P'+str(i)+'_O'+str(j)+'_Prepare',Value(i))
+                net.add_input('Robot0','P'+str(i)+'_O'+str(j)+'_Prepare',Value('R'))
+                net.add_output('P'+str(i)+'_O'+str(j)+'_Ready','P'+str(i)+'_O'+str(j)+'_Prepare',Value(i))
+                net.add_output('Robot0','P'+str(i)+'_O'+str(j)+'_Prepare',Value('R'))
                 if(j > 0):
-                    net.add_input('P'+str(i)+'_O'+str(j-1)+'_Finished','P'+str(i)+'_O'+str(j)+'_Prepare',Value(1))
-                    net.add_output('Buffer'+str(ProcessOperations[i][j-1]),'P'+str(i)+'_O'+str(j)+'_Prepare',Value(1))
+                    net.add_input('P'+str(i)+'_O'+str(j-1)+'_Finished','P'+str(i)+'_O'+str(j)+'_Prepare',Value(i))
+                    net.add_output('Buffer'+str(ProcessOperations[i][j-1]),'P'+str(i)+'_O'+str(j)+'_Prepare',Value(i))
         
                 net.add_transition(Transition('P'+str(i)+'_O'+str(j)+'_Begin'))
-                net.add_input('P'+str(i)+'_O'+str(j)+'_Ready','P'+str(i)+'_O'+str(j)+'_Begin',Value(1))
-                net.add_input('Machine'+str(ProcessOperations[i][j]),'P'+str(i)+'_O'+str(j)+'_Begin',Value(1))
-                net.add_output('P'+str(i)+'_O'+str(j)+'_InProgress','P'+str(i)+'_O'+str(j)+'_Begin',Value(1))
+                net.add_input('P'+str(i)+'_O'+str(j)+'_Ready','P'+str(i)+'_O'+str(j)+'_Begin',Value(i))
+                net.add_input('Machine'+str(ProcessOperations[i][j]),'P'+str(i)+'_O'+str(j)+'_Begin',Value('M'+str(ProcessOperations[i][j])))
+                net.add_output('P'+str(i)+'_O'+str(j)+'_InProgress','P'+str(i)+'_O'+str(j)+'_Begin',Value(i))
         
                 net.add_transition(Transition('P'+str(i)+'_O'+str(j)+'_Finish'))
-                net.add_input('P'+str(i)+'_O'+str(j)+'_InProgress','P'+str(i)+'_O'+str(j)+'_Finish',Value(1))
-                net.add_output('Machine'+str(ProcessOperations[i][j]),'P'+str(i)+'_O'+str(j)+'_Finish',Value(1))
-                net.add_output('P'+str(i)+'_O'+str(j)+'_Finished','P'+str(i)+'_O'+str(j)+'_Finish',Value(1))
+                net.add_input('P'+str(i)+'_O'+str(j)+'_InProgress','P'+str(i)+'_O'+str(j)+'_Finish',Value(i))
+                net.add_output('Machine'+str(ProcessOperations[i][j]),'P'+str(i)+'_O'+str(j)+'_Finish',Value('M'+str(ProcessOperations[i][j])))
+                net.add_output('P'+str(i)+'_O'+str(j)+'_Finished','P'+str(i)+'_O'+str(j)+'_Finish',Value(i))
     
             net.add_transition(Transition('P'+str(i)+'_Finish'))
-            net.add_input('P'+str(i)+'_O'+str(len(ProcessOperations[i])-1)+'_Finished','P'+str(i)+'_Finish',Value(1))
-            net.add_input('Robot0','P'+str(i)+'_Finish',Value(1))
-            net.add_output('Buffer'+str(ProcessOperations[i][-1]),'P'+str(i)+'_Finish',Value(1))
-            net.add_output('Robot0','P'+str(i)+'_Finish',Value(1))
+            net.add_input('P'+str(i)+'_O'+str(len(ProcessOperations[i])-1)+'_Finished','P'+str(i)+'_Finish',Value(i))
+            net.add_input('Robot0','P'+str(i)+'_Finish',Value('R'))
+            net.add_output('Buffer'+str(ProcessOperations[i][-1]),'P'+str(i)+'_Finish',Value(i))
+            net.add_output('Robot0','P'+str(i)+'_Finish',Value('R'))
 
         return net
 
@@ -72,7 +72,7 @@ class PT_Simulator(object):
             net.transition(transitionName).fire(Substitution())
             if( "Begin" in transitionName):
                 placeName = transitionName.replace("Begin","InProgress")
-                net.place(placeName).remove(1)
+                net.place(placeName).empty()
                 self.ProgressTimers[int(placeName[1])][int(placeName[4])] = time.time()
             return self.TransitionFired
         else:
@@ -86,7 +86,7 @@ class PT_Simulator(object):
                     currentTime = time.time()
                     if(currentTime - self.ProgressTimers[i][j] >= self.OperationDuration[i][j]):
                         placeName = 'P'+str(i)+'_O'+str(j)+'_InProgress'
-                        self.net.place(placeName).add(1)
+                        self.net.place(placeName).add(i)
                         self.ProgressTimers[i][j] = 0
 
         for transition in self.net.transition():

@@ -10,11 +10,12 @@ if __name__ == "__main__":
     ProcessOperations = [[0, 1]]
     OperationDuration = [[3, 4]]
     PTnet = LineSimulator.buildLinePTModel(BufferCapacity,ProcessOperations, OperationDuration)
-    print(LineSimulator.enabledTransitions())
-    LineSimulator.fireTransition(LineSimulator.enabledTransitions()[0].name)
-    time_start = time.time()
-    print(LineSimulator.enabledTransitions())
-    while(time.time() - time_start <= OperationDuration[0][0]):
-        dupa = 0
-    print(LineSimulator.enabledTransitions())
+    
+    while(True):
+        print(LineSimulator.enabledTransitions())
+        print(LineSimulator.net.get_marking())
+        if(len(LineSimulator.enabledTransitions()) > 0):
+            LineSimulator.fireTransition(LineSimulator.enabledTransitions()[-1].name)
+        time.sleep(1)
+
     PTnet.draw('OneProcessLineParametrised.png')

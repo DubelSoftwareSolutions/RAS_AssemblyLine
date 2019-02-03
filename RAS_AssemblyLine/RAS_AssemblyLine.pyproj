@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Executor.py" />
     <Compile Include="MultiProcessLineParametrised.py" />
     <Compile Include="OneProcessLine.py">
       <SubType>Code</SubType>
@@ -28,6 +29,7 @@
     <Compile Include="PT_Controller.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PT_NetBuilder.py" />
     <Compile Include="PT_Simulator.py">
       <SubType>Code</SubType>
     </Compile>
@@ -41,6 +43,12 @@
     <Compile Include="Tutorial3.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\example.yaml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
