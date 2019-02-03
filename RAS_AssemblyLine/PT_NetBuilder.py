@@ -7,6 +7,7 @@ class PT_NetBuilder:
     NumberOfParts = []
     RquiredMachines = []
     ExecutionTimes = []
+    OperationDuration = []
 
     @classmethod
     def build(cls, fname, simulator):
@@ -19,7 +20,7 @@ class PT_NetBuilder:
         print(cls.RquiredMachines)
         print(cls.ExecutionTimes)
 
-        return simulator.buildLinePTModel(cls.MachinesBufferCapacities, cls.OperationOrders, cls.ExecutionTimes)
+        return simulator.buildLinePTModel(cls.MachinesBufferCapacities, cls.OperationOrders, cls.OperationDuration)
 
     @classmethod
     def load(cls, fname):
@@ -27,8 +28,8 @@ class PT_NetBuilder:
             configuration = yaml.load(f)
 
         cls.loadMachines(configuration)
-        cls.loadProcesses(configuration)
         cls.loadOperations(configuration)
+        cls.loadProcesses(configuration)
 
     @classmethod
     def loadMachines(cls, configuration):
@@ -44,15 +45,20 @@ class PT_NetBuilder:
     def loadProcesses(cls, configuration):
         cls.OperationOrders = []
         cls.NumberOfParts = []
+        cls.OperationDuration = []
+
         Processes = configuration['processes']
 
         for process in Processes:
             order = []
+            duraion = []
             cls.NumberOfParts.append(Processes[process]['number_of_parts'])
             for operation in Processes[process]['order']:
                 order.append(operation)
+                duraion.append(cls.ExecutionTimes[operation])
 
             cls.OperationOrders.append(order)
+            cls.OperationDuration.append(duraion)
 
 
     @classmethod
