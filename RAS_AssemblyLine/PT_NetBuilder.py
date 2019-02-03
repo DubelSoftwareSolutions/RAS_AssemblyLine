@@ -20,7 +20,7 @@ class PT_NetBuilder:
         print(cls.RquiredMachines)
         print(cls.ExecutionTimes)
 
-        return simulator.buildLinePTModel(cls.MachinesBufferCapacities, cls.OperationOrders, cls.OperationDuration)
+        return simulator.buildLinePTModel(cls.MachinesBufferCapacities, cls.OperationOrders, cls.OperationDuration, cls.NumberOfParts)
 
     @classmethod
     def load(cls, fname):

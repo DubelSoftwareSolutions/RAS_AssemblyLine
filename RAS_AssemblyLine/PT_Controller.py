@@ -33,3 +33,7 @@ class PT_Controller(object):
         time.sleep(1)
         #input("Press Enter to continue...")
         Simulator.fireTransition(TransitionToFire)
+
+    def HandleDeadlock(self, Simulator):
+        input("Press Enter to continue...")
+        sys.exit(-1)
