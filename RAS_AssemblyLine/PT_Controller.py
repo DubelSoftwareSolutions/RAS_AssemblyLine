@@ -27,10 +27,9 @@ class PT_Controller(object):
                 elif("Prepare" in Transitions[i].name):
                     TransitionPriorities[i] = self.OperationPreparePriority
                 TransitionPriorities[i] += int(Transitions[i].name[4])*1
-            TransitionPriorities[i] += int(Transitions[i].name[1])*10
+            #TransitionPriorities[i] += int(Transitions[i].name[1])*10
         TransitionToFire = Transitions[numpy.argmin(TransitionPriorities)].name
         print("Transition To Fire: "+TransitionToFire)
-        time.sleep(1)
         #input("Press Enter to continue...")
         Simulator.fireTransition(TransitionToFire)
 

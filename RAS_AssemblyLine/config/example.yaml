@@ -5,6 +5,11 @@ machines:
     capacity: 1
 
 processes:
+  p0:
+    order:
+      - 0
+      - 1
+    number_of_parts: 1
   p1:
     order:
       - 0

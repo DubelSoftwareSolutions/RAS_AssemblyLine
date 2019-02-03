@@ -19,19 +19,18 @@ def main():
     PTNet = PT_NetBuilder.build('config/' + config + '.yaml', LineSimulator)
     PTNet.draw(drawings + 'OneProcessLineParametrised.png')
     deadlockTimer = time.time()
-    print(LineSimulator.enabledTransitions())
-    print(LineSimulator.net.get_marking())
     while(True):
        #input("Press Enter to continue...")
+       print(LineSimulator.enabledTransitions())
+       print(LineSimulator.net.get_marking())
        if(len(LineSimulator.enabledTransitions()) > 0):
            deadlockTimer = time.time()
            LineController.ExecuteHighestPriority(LineSimulator)
-           print(LineSimulator.enabledTransitions())
-           print(LineSimulator.net.get_marking())
        else:
            if(time.time() - deadlockTimer > numpy.max(LineSimulator.OperationDuration) + 2):
                print("DEADLOCK OCCURED")
                LineController.HandleDeadlock(LineSimulator)
+       time.sleep(1)
 
 
 if __name__ == '__main__':

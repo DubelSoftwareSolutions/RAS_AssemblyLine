@@ -1,3 +1,4 @@
+import numpy
 import time
 import snakes.plugins
 snakes.plugins.load('gv', 'snakes.nets', 'nets')
@@ -23,7 +24,7 @@ class PT_Simulator(object):
         numberOfProcesses = len(ProcessOperations)
         self.ProcessOperations = ProcessOperations
         self.OperationDuration = OperationDuration
-        self.ProgressTimers = [[0] * len(ProcessOperations[0])] * len(ProcessOperations)
+        self.ProgressTimers = numpy.zeros((len(ProcessOperations[0]),len(ProcessOperations)))
         self.StartedProcesses = [0] * numberOfProcesses
         self.NumberOfParts = NumberOfParts
         net = self.net
@@ -85,10 +86,13 @@ class PT_Simulator(object):
                 self.ProgressTimers[int(placeName[1])][int(placeName[4])] = time.time()
             if("Prepare" in transitionName and "_O0" in transitionName):
                 self.StartedProcesses[int(transitionName[1])] += 1
-            if( "Finish" in transitionName and "_O" not in transitionName):
+            if("Finish" in transitionName and "_O" in transitionName):
+                self.ProgressTimers[int(transitionName[1])][int(transitionName[4])] = 0
+            if("Finish" in transitionName and "_O" not in transitionName):
                 file = open("./output/FinishedProcesses.txt","a")
                 file.write(transitionName + '\n')
                 file.close()
+            print("TransitionFired: "+transitionName) 
             return self.TransitionFired
         else:
             return self.TransitionDisabled
