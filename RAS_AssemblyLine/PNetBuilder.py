@@ -5,6 +5,8 @@ class PNetBuilder:
     MachinesBufferCapacities = []
     OperationOrders = []
     NumberOfParts = []
+    RquiredMachines = []
+    ExecutionTimes = []
 
     @classmethod
     def build(cls, fname):
@@ -14,10 +16,14 @@ class PNetBuilder:
 
         cls.loadMachines(configuration)
         cls.loadProcesses(configuration)
+        cls.loadOperations(configuration)
 
         print(cls.MachinesBufferCapacities)
         print(cls.OperationOrders)
         print(cls.NumberOfParts)
+
+        print(cls.RquiredMachines)
+        print(cls.ExecutionTimes)
 
     @classmethod
     def loadMachines(cls, configuration):
@@ -44,3 +50,12 @@ class PNetBuilder:
             cls.OperationOrders.append(order)
 
 
+    @classmethod
+    def loadOperations(cls, configuration):
+        cls.RquiredMachines = []
+        cls.ExecutionTimes = []
+        Operations = configuration['operations']
+
+        for operation in Operations:
+            cls.RquiredMachines.append(Operations[operation]['required_machine'])
+            cls.ExecutionTimes.append(Operations[operation]['execution_time'])
