@@ -21,6 +21,7 @@ def main():
     deadlockTimer = time.time()
     while(True):
        #input("Press Enter to continue...")
+       print("")
        print(LineSimulator.enabledTransitions())
        print(LineSimulator.net.get_marking())
        if(len(LineSimulator.enabledTransitions()) > 0):

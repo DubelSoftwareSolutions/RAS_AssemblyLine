@@ -7,6 +7,8 @@ from nets import *
 class PT_Simulator(object):
     
     def __init__(self):
+        self.StartTimeStamp = time.time()
+        self.OutputFilePath = './output/sim_' + time.strftime("%Y_%m_%d__%H_%M_%S", time.localtime(self.StartTimeStamp)) + '.txt'
         self.net = PetriNet('MultiProcessAssemblyLine')
         self.TransitionFired = 0
         self.TransitionDisabled = 1
@@ -92,7 +94,10 @@ class PT_Simulator(object):
                 file = open("./output/FinishedProcesses.txt","a")
                 file.write(transitionName + '\n')
                 file.close()
-            print("TransitionFired: "+transitionName) 
+            print("TransitionFired: "+transitionName)
+
+            if(not "Prepare" in transitionName):
+                self.saveTransition(transitionName)
             return self.TransitionFired
         else:
             return self.TransitionDisabled
@@ -115,3 +120,21 @@ class PT_Simulator(object):
                 else:
                     EnabledTransitions.extend([transition])
         return EnabledTransitions
+
+    def saveTransition(self, transitionName):
+        f = open(self.OutputFilePath, 'a')
+        machine = '0'
+        if("Finish" in transitionName and "O" in transitionName ):
+            try:
+                machine = str(self.net.get_marking()[transitionName+'ed']).replace('{', '').replace('}', '')
+            except KeyError:
+                try:
+                    machine = str(self.net.get_marking()[transitionName])
+                except KeyError:
+                    machine = ''
+
+        f.write(transitionName + '_' +
+                str((int)(time.time() - self.StartTimeStamp)) +
+                '_' + machine +
+                '\n')
+        f.close()
