@@ -9,8 +9,10 @@ class PNetBuilder:
             configuration = yaml.load(f)
 
         MachinesBufferCapacities = cls.loadMachines(cls, configuration)
+        orders = cls.loadProcessOrders(cls, configuration)
 
         print(MachinesBufferCapacities)
+        print(orders)
 
     def loadMachines(self, configuration):
         machines_buffer_capacities = []
@@ -19,4 +21,16 @@ class PNetBuilder:
         for machine in machines:
             machines_buffer_capacities.append(machines[machine]['capacity'])
 
-        return machines_buffer_capacities
+    def loadProcessOrders(self, configuration):
+        OperationOrders = []
+
+        Processes = configuration['processes']
+
+        for process in Processes:
+            order = []
+            for operation in Processes[process]['order']:
+                order.append(operation)
+
+            OperationOrders.append(order)
+
+        return OperationOrders
