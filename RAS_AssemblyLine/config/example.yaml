@@ -1,0 +1,44 @@
+machines:
+  m1:
+    capacity: 2
+  m2:
+    capacity: 2
+  m3:
+    capacity: 2
+  m4:
+    capacity: 2
+
+processes:
+  p1:
+    order:
+      - p11
+      - p12
+      - p13
+    numper_of_parts: 8
+  p2:
+    order:
+      - p21
+      - p22
+      - p23
+    numper_of_parts: 8
+  p3:
+    order:
+      - p31
+      - p32
+      - p33
+    numper_of_parts: 8
+
+
+operations:
+  o1:
+    required_machine: m1
+    execution_time: 8
+  o2:
+    required_machine: m1
+    execution_time: 8
+  o3:
+    required_machine: m1
+    execution_time: 8
+  o4:
+    required_machine: m1
+    execution_time: 8
