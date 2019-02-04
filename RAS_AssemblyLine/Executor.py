@@ -14,8 +14,8 @@ def main():
     else:
         config = sys.argv[1]
 
-    # display("output/sim_2019_02_03__22_52_52.txt", 4)
-    # sys.exit()
+    display("output/sim_2019_02_03__22_52_52.txt", 4)
+    sys.exit()
 
     LineSimulator = PT_Simulator()
     LineController = PT_Controller()

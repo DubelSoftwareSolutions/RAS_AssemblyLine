@@ -2,3 +2,4 @@
 .vs
 *.png
 sim_*
+*cache*
