@@ -1,0 +1,80 @@
+%Praca inżynierska iRVision
+%Ustawienia formatowania dokumentu 
+%Autorzy: Krzysztof Dąbek
+
+% Ustawienia kodowania 
+% !TeX encoding = UTF-8
+
+% Ustawienia sprawdzania poprawności pisowni
+% !TeX spellcheck = pl_PL
+
+% Określenie typu dokumentu i rozmiaru czcionki
+\documentclass[12pt, a4paper]{article}
+
+%Ustawienia strony i marginesów
+\usepackage[a4paper, left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm, headsep=1.2cm]{geometry}
+
+%Ustawienia języka dokumentu
+%\usepackage[polish]{babel}
+%\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+
+%Ustawienia czcionki
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\definecolor{textgray}{gray}{0.1}
+\definecolor{framebg}{gray}{0.9}
+
+%Ustawienia ramek
+\usepackage{mdframed}
+\definecolor{shadecolor}{RGB}{200,200,200}
+\mdfdefinestyle{ReportFrameStyle}{
+innerleftmargin=10,innerrightmargin=10,
+topline=true,leftline=true,bottomline=true,rightline=true,
+linecolor=black, shadow=false, linewidth=1,
+middlelinewidth=0, innerlinewidth=0, outerlinewidth=0,
+backgroundcolor=framebg}
+
+%Pakiety obrazów
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{rotating}
+\usepackage{float}
+
+%Pakiety tabel
+\usepackage{supertabular}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{hhline}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{colortbl}
+
+%Pakiety import / eksport
+\usepackage{url}
+\usepackage{listings}
+\usepackage{hyperref}
+
+%Pakiety edytorskie
+\usepackage{enumitem}
+
+%Pakiety programisty
+%\usepackage{forloop}
+%\usepackage{calc}
+
+\usepackage{mathtools}
+%\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+%\usepackage{amssymb}
+
+
+%Definicje grubszych kolumn
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%Zawijanie długich linii
+\sloppy
+
+%Resetowanie numerowania stron
+\pagenumbering{gobble}

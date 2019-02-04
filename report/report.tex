@@ -1,0 +1,68 @@
+%Autorzy: Krzysztof Dąbek, Dymitr Choroszczak
+
+\include{Settings}
+\include{Variables}
+
+
+\begin{document}
+\TitlePage
+
+\section*{Introduction}
+Current report contains solution of task 5 on project of Event-based Control cours. This task was done via using Python programming language and Snakes toolbox which belongs to it. 
+
+The task consisted of developing controller for a flexible manufacturing cell consisting of
+one transport robot and 5 machines. (fig. \ref{approach}). 
+		\begin{figure}[!tp]
+		\centering
+		\includegraphics[scale=0.7]{figures/approach.png}
+		\caption{Exemplary approach \label{approach}}
+		\end{figure}
+			
+\section{Model}
+\subsection{Main model}
+Main system model with 5 robots is presented on figure \ref{approach}.
+		
+\subsection{Simulator}
+Simulator was developed in order to manage simulation process. 
+Simulator contains following instances:
+\begin{itemize}
+\item Net,
+\item Transition Fired,
+\item Transition Disabled, 
+\item Process Operations, 
+\item Operation Duration, 
+\item Progress Timers, 
+\item Started Processes, 
+\item Number Of Parts 
+\end{itemize}
+which store manufacturing cell configuration and current state. Given class allows to initiate P/T net with all required resources and transitions.
+					
+		
+\subsection{Controller}
+The controller design, which proceeds permissions on successive transitions, and grants permissions to most significant ones. Permissions are granted first of all to transitions with highest priority. Priorities are stored in class in following order with growing priorities.
+
+\begin{itemize}
+\item Process Finish Priority,
+\item Operation Finish Priority,
+\item Operation Begin Priority,
+\item Operation Prepare Priority
+\end{itemize}
+		
+\section{Simulation}
+The simulation results of designed model are presented on figure \ref{example_simulation}. Simulation time was established equal to 60s. Plot shows the states in which machines was in individual time points: free or busy.
+		
+		\begin{figure}[!tp]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/example_simulation.png}
+		\caption{Simulation \label{example_simulation}}
+		\end{figure}			
+		
+Configuration of cell is showed on figure \ref{example_config}.	
+				
+		\begin{figure}[!tp]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/example_config.png}
+		\caption{Configuration \label{example_config}}
+		\end{figure}			
+		
+\end{document}

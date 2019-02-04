@@ -1,0 +1,58 @@
+%Zmienne dokumentu
+%Autorzy: Krzysztof Dąbek, Dymitr Choroszczak
+
+% Zmienne wykorzystywane w programie
+% Tytuł pracy
+\newcommand{\ThesisTitle}{Event-based Control -- Project}
+
+% Aspekt inżynierski
+\newcommand{\ThesisAspect}{Task 5:    FMS controller}
+
+% Autor pracy
+\newcommand{\ThesisAuthor}{Dymitr Choroszczak (218627), Krzysztof Dąbek (218549)}
+
+% Promotor pracy
+\newcommand{\ThesisSupervisor}{Dr hab. inż. Elżbieta Roszkowska}
+
+% Uczelnia
+\newcommand{\UniversityName}{Politechnika Wrocławska}
+\newcommand{\UniversityNameEng}{Wrocław University of Science and Technology}
+\newcommand{\DeparamentName}{Faculty of Elektroncs}
+\newcommand{\InstituteName}{Chair of Cybernetics and Robotics}
+\newcommand{\Field}{Control Engineering and Robotics}
+\newcommand{\FacoultyName}{Faculty of Electronics}
+\newcommand{\Specialty}{Embedded robotics (AER)}
+\newcommand{\IndexNumber}{218627}
+\newcommand{\Logo}{\FigDir /logo_eng.png}
+
+% Ścieżka do obrazów
+\newcommand{\FigDir}{./figures}
+%szczauka
+\newcommand{\ra}{\rightarrow}
+
+\renewcommand*{\figurename}{Figure.} 
+
+% Makro do tworzenia strony tytułowej
+\newcommand{\TitlePage}{
+\begin{figure}
+\centering
+\includegraphics[height=0.4\textheight]{\Logo}
+\end{figure}
+\vspace{10cm}
+\centering
+\begin{Huge}
+\textbf{\ThesisTitle} \\
+\vspace{2cm}
+\ThesisAspect \\
+\vspace{3cm}
+\end{Huge}
+\flushleft 
+\textbf{Author:} \ThesisAuthor \\
+%\textbf{Index Number:} \IndexNumber \\
+\textbf{Teacher:} \ThesisSupervisor \\
+%\textbf{University:} \UniversityNameEng \\
+\textbf{Faculty:} \FacoultyName \\
+\textbf{Field of study} \Field \\
+\textbf{Speciality:} \Specialty \\
+\newpage
+}
